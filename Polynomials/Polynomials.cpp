@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "..\PolynomialsLib\PolynomialsCli.h"
 
 /*This function creates the menu.                                        */
 void menu()
@@ -120,6 +121,12 @@ void funcseven(int x1, int y1, int x2, int y2, float *a, float *b)
 }
 
 int main()
+{
+	PolynomialsCli application = PolynomialsCli();
+	return application.Run();
+}
+
+int main2()
 {
 	int x1, y1, x2, y2, x3, y3, z3, c, opt, exit;
 	float X3, Y3, c1;
