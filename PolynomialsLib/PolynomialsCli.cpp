@@ -11,12 +11,26 @@ Polynomial PolynomialsCli::PolynomialInput(string description)
 {
 	int degree;
 	cout << "Enter the degree (highest exponent) of the" << description << "polynoimial.\n";
-	cin >> degree;
+	while (!(cin >> degree))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Invalid degree.\n";
+	}
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	vector<double> coefficients(degree + 1);
 	cout << "Enter the coefficients (x^" << degree << " term first) for the" << description << "polynomial.\n";
 	for (int i = degree;i >= 0;i--)
 	{
-		cin >> coefficients[i];
+		while (!(cin >> coefficients[i]))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Invalid coefficient.\n";
+		}
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
 	return Polynomial(coefficients);
 }
@@ -29,8 +43,22 @@ ComplexNumber PolynomialsCli::ComplexNumberInput(string description)
 {
 	int a, b;
 	cout << "Enter the coefficients (i term first) for the" << description << "complex number.\n";
-	cin >> a;
-	cin >> b;
+	while (!(cin >> a))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Invalid coefficient.\n";
+	}
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	while (!(cin >> b))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Invalid coefficient.\n";
+	}
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	return ComplexNumber(a, b);
 }
 
@@ -53,10 +81,12 @@ int PolynomialsCli::Run()
 		cout << "7. Divide two complex numbers of the form ai + b.\n";
 		cout << "8. Quit.\n";
 		int option;
-		cin >> option;
-
-		switch (option)
+		if (cin >> option)
 		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			switch (option)
+			{
 			case 1:
 			{
 				Polynomial p1 = PolynomialInput(" first ");
@@ -86,7 +116,14 @@ int PolynomialsCli::Run()
 				Polynomial p2 = PolynomialInput(" ");
 				cout << "Enter the number by which the polynomial is to be multiplied.\n";
 				vector<double> coefficients(1);
-				cin >> coefficients[0];
+				while (!(cin >> coefficients[0]))
+				{
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					cout << "Invalid value.\n";
+				}
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				Polynomial p1 = Polynomial(coefficients);
 				Polynomial product = p1 * p2;
 				cout << p1 << " * (" << p2 << ") = " << product << "\n\n";
@@ -119,16 +156,22 @@ int PolynomialsCli::Run()
 			case 8:
 			{
 				exit = true;
-				printf("Normal Exit.");
+				printf("Normal Exit.\n");
 			}
 			break;
 			default:
 			{
-				printf("Invalid choice.");
+				printf("Invalid choice.\n");
 			}
 			break;
+			}
 		}
-
+		else
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Invalid choice.\n";
+		}
 	} while (!exit);
 
 	return 0;
