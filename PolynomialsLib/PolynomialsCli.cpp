@@ -156,12 +156,12 @@ int PolynomialsCli::Run()
 			case 8:
 			{
 				exit = true;
-				printf("Normal Exit.\n");
+				cout << "Normal Exit.\n";
 			}
 			break;
 			default:
 			{
-				printf("Invalid choice.\n");
+				cout << "Invalid choice.\n";
 			}
 			break;
 			}
